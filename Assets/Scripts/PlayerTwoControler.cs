@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-public class PlayerTwoControler : MonoBehaviour
+public class PlayerTwoControler : PlayerControler
 {
     [SerializeField] private PlayerTwoInputReader inputReader;
     [SerializeField] private PlayerSettings playerSettings;
