@@ -16,7 +16,6 @@ public class PlayerBumper : MonoBehaviour
     {
         var PlayerRigidbody2D = Player.GetComponent<Rigidbody2D>();
         var Direction = Player.transform.position - transform.position;
-        Debug.Log(Direction.normalized);
         PlayerRigidbody2D.linearVelocity = Vector2.zero;
         PlayerRigidbody2D.AddForce(Direction.normalized * _bumperStrength, ForceMode2D.Impulse);
     }
