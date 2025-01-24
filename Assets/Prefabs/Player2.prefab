@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6616392527481746621}
   - component: {fileID: 3509545575299320162}
   - component: {fileID: 8103601346555914258}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9909b3affd72349b4720962a1d8d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 11400000, guid: ef47d494275ad6b46ac0235053518618, type: 2}
   playerSettings: {fileID: 11400000, guid: a3ba95017c1ec7144ba5ecc90687a677, type: 2}
   rb2D: {fileID: 6616392527481746621}
   isGrounded: 0
@@ -122,6 +121,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 2151955122624558011}
+  inputReader: {fileID: 11400000, guid: ef47d494275ad6b46ac0235053518618, type: 2}
 --- !u!1 &5068172547047990622
 GameObject:
   m_ObjectHideFlags: 0
