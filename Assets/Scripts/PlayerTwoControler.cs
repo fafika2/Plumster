@@ -1,24 +1,9 @@
 
 using UnityEngine;
 
-public class PlayerTwoControler : MonoBehaviour
+public class PlayerTwoControler : PlayerControler
 {
-    [SerializeField] private PlayerTwoInputReader inputReader;
-    [SerializeField] private PlayerSettings playerSettings;
-    
-    [SerializeField] private Rigidbody2D rb2D;
-    
-    [SerializeField] private bool isGrounded;
-    [SerializeField] private bool jumpRequested;
-    [SerializeField] private bool actionRequested;
-    [SerializeField] private bool isJumping;
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] private Transform groundCheck;
-    
-    private Vector2 movementVectorLeftRight;
-    private float currentHorizontalSpeed;
-    private float currentVerticalSpeed;
-    private float timeInAirAfterUngrounded;
+    [SerializeField] protected PlayerTwoInputReader inputReader;
     void OnEnable()
     {
         inputReader.OnMoveLeftRightEvent += HandleOnMoveLeftRight;
@@ -32,63 +17,27 @@ public class PlayerTwoControler : MonoBehaviour
         inputReader.OnJumpEvent -= HandleJump;
         inputReader.OnActionEvent -= HandleAction;
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
-   
-
     // Update is called once per frame
     void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, playerSettings.GrounderCheckCollider,groundLayer );
         MovementHorizontal();
         Jump();
-        
-        
-        
-        // Apply the updated velocity
-        rb2D.linearVelocity = new Vector2(currentHorizontalSpeed, currentVerticalSpeed);
     }
     
     private void Jump()
     {
         if (isJumping && isGrounded)
         {
-            currentVerticalSpeed = playerSettings.JumpPower;
-            isJumping = false; // Reset jump request after applying the jump
-        }
-        else if (!isGrounded)
-        {
-            // Gradually increase fall speed toward maxFallSpeed
-            currentVerticalSpeed = Mathf.MoveTowards(currentVerticalSpeed, playerSettings.MaxFallSpeed, -playerSettings.FallAcceleration * Time.fixedDeltaTime);
-        }
-        else
-        {
-            // When grounded and not jumping, ensure the vertical velocity stays consistent
-            currentVerticalSpeed = Mathf.Clamp(currentVerticalSpeed, -Mathf.Epsilon, Mathf.Epsilon);
+            rb2D.AddForce(Vector2.up * playerSettings.JumpPower, ForceMode2D.Impulse );
+            Debug.Log("Jump");
+            isJumping = false;
         }
     }
     private void MovementHorizontal()
     {
-        if (movementVectorLeftRight.x != 0)
-        {
-            // Accelerate towards the target speed
-            currentHorizontalSpeed = Mathf.MoveTowards(currentHorizontalSpeed, movementVectorLeftRight.x * playerSettings.maxMovementSpeed, playerSettings.movementAcceleration * Time.deltaTime);
-        }
-        else
-        {
-            // Decelerate towards 0 when no input is given
-            currentHorizontalSpeed = Mathf.MoveTowards(currentHorizontalSpeed, 0, playerSettings.movementGroundDeceleration * Time.deltaTime);
-        }
+        rb2D.AddForce(new Vector2(movementVectorLeftRight.x *playerSettings.movementAcceleration, 0), ForceMode2D.Impulse);
+        rb2D.linearVelocity = new Vector2(Mathf.Clamp(rb2D.linearVelocity.x, -playerSettings.maxMovementSpeed, playerSettings.maxMovementSpeed), rb2D.linearVelocity.y);
     }
     
     private void HandleOnMoveLeftRight(Vector2 value)
