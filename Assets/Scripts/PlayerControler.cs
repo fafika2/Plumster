@@ -21,7 +21,7 @@ public class PlayerControler : MonoBehaviour
 
     protected void HandleOnMoveLeftRight(Vector2 value)
     {
-        Debug.Log(value);
+        //Debug.Log(value);
         movementVectorLeftRight = value;
     }
 
@@ -33,5 +33,10 @@ public class PlayerControler : MonoBehaviour
     protected void HandleAction(bool value)
     {
         actionRequested = value;
+    }
+
+    public Rigidbody2D GetRigidBody2d()
+    {
+        return rb2D;
     }
 }
