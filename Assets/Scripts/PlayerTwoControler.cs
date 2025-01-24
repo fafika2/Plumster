@@ -37,6 +37,7 @@ public class PlayerTwoControler : PlayerControler
     private void MovementHorizontal()
     {
         rb2D.AddForce(new Vector2(movementVectorLeftRight.x *playerSettings.movementAcceleration, 0), ForceMode2D.Impulse);
+        rb2D.linearVelocity = new Vector2(Mathf.Clamp(rb2D.linearVelocity.x, -playerSettings.maxMovementSpeed, playerSettings.maxMovementSpeed), rb2D.linearVelocity.y);
     }
     
     private void HandleOnMoveLeftRight(Vector2 value)
