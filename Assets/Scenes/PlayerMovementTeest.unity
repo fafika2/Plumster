@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1_2
       objectReference: {fileID: 0}
+    - target: {fileID: 5673154103647776355, guid: ccf5ee866408fe34d88a981d26f8af3c, type: 3}
+      propertyPath: playerSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: a3ba95017c1ec7144ba5ecc90687a677, type: 2}
     - target: {fileID: 7523382574373249710, guid: ccf5ee866408fe34d88a981d26f8af3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.02
@@ -171,8 +175,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8358229376531018186, guid: ccf5ee866408fe34d88a981d26f8af3c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358229376531018186, guid: ccf5ee866408fe34d88a981d26f8af3c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2401692086318662677, guid: ccf5ee866408fe34d88a981d26f8af3c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccf5ee866408fe34d88a981d26f8af3c, type: 3}
@@ -495,10 +508,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2010237389391176956, guid: f0231fa436e6a384382a39c36be0182a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2010237389391176956, guid: f0231fa436e6a384382a39c36be0182a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6995653324996024170, guid: f0231fa436e6a384382a39c36be0182a, type: 3}
       propertyPath: m_Name
       value: Player2_2
       objectReference: {fileID: 0}
+    - target: {fileID: 9186342551233363794, guid: f0231fa436e6a384382a39c36be0182a, type: 3}
+      propertyPath: playerSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: a3ba95017c1ec7144ba5ecc90687a677, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
