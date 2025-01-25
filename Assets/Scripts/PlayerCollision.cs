@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -40,6 +41,8 @@ public class PlayerCollision : MonoBehaviour
             else if (Player1VelocitySum > Player2VelocitySum)
             {
                 var Difference = Player2VelocitySum / Player1VelocitySum;
+                var VelocityDif = Player1VelocitySum - Player2VelocitySum;
+                DoDamage(Player2Position.gameObject, VelocityDif);
 
                 _player1RigidBody2D.linearVelocity = Vector2.zero;
                 _player1RigidBody2D.AddForce(Player1Direction.normalized * playerSettings.CollisionPower * Difference, ForceMode2D.Impulse);
@@ -50,6 +53,8 @@ public class PlayerCollision : MonoBehaviour
             else
             {
                 var Difference = Player1VelocitySum / Player2VelocitySum;
+                var VelocityDif = Player2VelocitySum - Player1VelocitySum;
+                DoDamage(Player1Position.gameObject, VelocityDif);
 
                 _player1RigidBody2D.linearVelocity = Vector2.zero;
                 _player1RigidBody2D.AddForce(Player1Direction.normalized * playerSettings.CollisionPower, ForceMode2D.Impulse);
@@ -57,7 +62,12 @@ public class PlayerCollision : MonoBehaviour
                 _player2RigidBody2D.linearVelocity = Vector2.zero;
                 _player2RigidBody2D.AddForce(Player2Direction.normalized * playerSettings.CollisionPower * Difference, ForceMode2D.Impulse);
             }
-
         }
+    }
+
+    private void DoDamage(GameObject Object, float DamageCount)
+    {
+        var DamageSettings = Object.GetComponent<PlayerHealth>();
+        DamageSettings.TakeDamage(DamageCount);
     }
 }
