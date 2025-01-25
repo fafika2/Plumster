@@ -9,6 +9,8 @@ public class Pickable : MonoBehaviour
 
     public Color ActiveColor;
     public Color InActiveColor;
+    
+    public PowerUpBase PowerUp;
 
     private void Awake()
     {
@@ -18,12 +20,24 @@ public class Pickable : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isActive)
         {
+            PlayerControler playerController = other.GetComponent<PlayerControler>();
+            if (!playerController.HasPowerUp()) return;
             SetOnCoolDown();
+            OnPickup(other.gameObject);
         }
     }
 
-    protected virtual void OnPickup()
+    public void OnPickup(GameObject other)
     {
+        if (other.CompareTag("Player") && isActive)
+        {
+            Debug.Log("Player controller found");
+            Debug.Log("Picked up");
+            
+            PowerUpBase createdPowerUp = Instantiate(PowerUp, other.transform.position, Quaternion.identity, other.transform);
+            other.GetComponent<PlayerControler>().SetCurrentPowerUp(createdPowerUp);
+            createdPowerUp.SetPlayerControler(other.GetComponent<PlayerControler>());
+        }
         
     }
 

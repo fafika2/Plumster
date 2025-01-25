@@ -26,6 +26,7 @@ public class PlayerOneControler : PlayerControler
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, playerSettings.GrounderCheckCollider,groundLayer);
         MovementHorizontal();
         Jump();
+        UsePowerUp();
     }
     
     private void Jump()
@@ -35,6 +36,15 @@ public class PlayerOneControler : PlayerControler
             rb2D.AddForce(Vector2.up * playerSettings.JumpPower, ForceMode2D.Impulse );
             Debug.Log("Jump");
             isJumping = false;
+        }
+    }
+
+    private void UsePowerUp()
+    {
+        if (currentPowerUp != null && actionRequested)
+        {
+            currentPowerUp.UsePowerUp();
+            actionRequested = false;
         }
     }
     private void MovementHorizontal()
