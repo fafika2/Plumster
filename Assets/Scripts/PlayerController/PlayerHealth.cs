@@ -1,3 +1,4 @@
+using System.Collections;
 using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Rigidbody2D _playerRigidbody;
     [Header("Heatlh Bar")]
     [SerializeField] private Slider _playerSlider;
+
+    private bool canTakeDamage = true;
 
     private void KillPlayer()
     {
@@ -35,6 +38,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (!canTakeDamage) return;
         currentHealth -= damage;
         var SliderValue = currentHealth / _maxHealth;
         _playerSlider.value = SliderValue;
@@ -46,4 +50,14 @@ public class PlayerHealth : MonoBehaviour
         TakeDamage(100);
     }
 
+    public void MakePlayerInvicible(float seconds)
+    {
+        StartCoroutine(Invicibility(seconds));
+    }
+    IEnumerator Invicibility(float seconds)
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(seconds);
+        canTakeDamage = true;
+    }
 }

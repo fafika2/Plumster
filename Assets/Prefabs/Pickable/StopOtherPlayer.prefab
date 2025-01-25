@@ -106,7 +106,7 @@ MonoBehaviour:
   SpriteRenderer: {fileID: 8070113172231631700}
   ActiveColor: {r: 0, g: 0, b: 0, a: 0}
   InActiveColor: {r: 1, g: 1, b: 1, a: 0.27450982}
-  PowerUp: {fileID: 0}
+  PowerUp: {fileID: 6543368003113564289, guid: a4303d6cda5804e438f15027e2b5d771, type: 3}
 --- !u!58 &3821207292662360494
 CircleCollider2D:
   m_ObjectHideFlags: 0
