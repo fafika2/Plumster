@@ -16,6 +16,7 @@ public class PlayerCollision : MonoBehaviour
             float positivePlayerVelocityX = Mathf.Abs(playerVelocityX);
             float playerVelocityY = playerVelocity.y;
             float positivePlayerVelocityY = Mathf.Abs(playerVelocityY);
+            
             Vector2 enemyVelocity = other.gameObject.GetComponent<Rigidbody2D>().linearVelocity;
             float enemyVelocityX = enemyVelocity.x;
             float positiveEnemyVelocityX = Mathf.Abs(enemyVelocityX);
@@ -25,11 +26,21 @@ public class PlayerCollision : MonoBehaviour
             float sumUpVelocityEnemy = positiveEnemyVelocityX + positiveEnemyVelocityY;
             float sumUpVelocityPlayer = positivePlayerVelocityX + positivePlayerVelocityY;
 
-            Debug.Log($"Player velocity equals {sumUpVelocityPlayer}, enemy velocity equals {sumUpVelocityEnemy}");
-            if (sumUpVelocityEnemy < sumUpVelocityPlayer)
+            Debug.Log($"CALLED BY {playerName}: Player velocity equals {sumUpVelocityPlayer}, enemy velocity equals {sumUpVelocityEnemy}");
+            if (sumUpVelocityPlayer >  sumUpVelocityEnemy)
             {
                 Debug.Log("Player Velocity is higher then enemy Velocity");
-                player.GetRigidBody2d().AddForce(Vector2.up * 100, ForceMode2D.Impulse);
+
+                Vector2 cachedVelocity = playerVelocity.normalized;
+
+                other.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+                other.GetComponent<Rigidbody2D>().AddForce(cachedVelocity.normalized * 500, ForceMode2D.Impulse);
+                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up  * 500, ForceMode2D.Impulse);
+
+                player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+                player.GetComponent<Rigidbody2D>().AddForce(cachedVelocity.normalized * -1 * 500, ForceMode2D.Impulse);
+                player.GetComponent<Rigidbody2D>().AddForce(Vector2.up  * 500, ForceMode2D.Impulse);
+                
             }
             
         }
