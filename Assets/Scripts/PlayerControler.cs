@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerControler : MonoBehaviour
     
     [SerializeField] protected bool isGrounded;
     [SerializeField] protected bool jumpRequested;
+    [SerializeField] protected bool canMove = true;
     [SerializeField] protected bool actionRequested;
     [SerializeField] protected bool isJumping;
     [SerializeField] protected LayerMask groundLayer;
@@ -23,6 +25,7 @@ public class PlayerControler : MonoBehaviour
 
     protected void HandleOnMoveLeftRight(Vector2 value)
     {
+        if (!canMove) return;
         //Debug.Log(value);
         movementVectorLeftRight = value;
     }
@@ -63,5 +66,24 @@ public class PlayerControler : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void SetCanMove(bool value)
+    {
+        canMove = value;
+    }
+
+    public void StartCanMoveCouroutine(float time)
+    {
+        StartCoroutine(CanMoveCouroutine(time));
+    }
+
+    IEnumerator CanMoveCouroutine(float time)
+    {
+        movementVectorLeftRight = Vector2.zero;
+        SetCanMove(false);
+        yield return new WaitForSeconds(time);
+        SetCanMove(true);
+        yield return null;
     }
 }
