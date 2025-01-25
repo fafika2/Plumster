@@ -1,28 +1,31 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pickable : MonoBehaviour
 {
-    public float CooldownValue;
+    
+    [SerializeField] private List<GameObject> pickups;
+    [SerializeField] private float timeBetweenPickups;
     public bool isActive;
     public SpriteRenderer SpriteRenderer;
-
-    public Color ActiveColor;
-    public Color InActiveColor;
     
-    public PowerUpBase PowerUp;
+    
+    public PowerUpBase[] PowerUp;
+
+    private int randomIndex;
 
     private void Awake()
     {
-        ActiveColor = SpriteRenderer.color;
+        StartCoroutine(RespawnPickup());
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isActive)
+        if (other.CompareTag("Player") && isActive)
         {
             PlayerControler playerController = other.GetComponent<PlayerControler>();
             if (!playerController.HasPowerUp()) return;
-            SetOnCoolDown();
             OnPickup(other.gameObject);
         }
     }
@@ -31,28 +34,27 @@ public class Pickable : MonoBehaviour
     {
         if (other.CompareTag("Player") && isActive)
         {
-            Debug.Log("Player controller found");
-            Debug.Log("Picked up");
-            
-            PowerUpBase createdPowerUp = Instantiate(PowerUp, other.transform.position, Quaternion.identity, other.transform);
+            isActive = false;
+            PowerUpBase createdPowerUp = Instantiate(PowerUp[randomIndex], other.transform.position, Quaternion.identity, other.transform);
+            SpriteRenderer.sprite = null;
             other.GetComponent<PlayerControler>().SetCurrentPowerUp(createdPowerUp);
             createdPowerUp.SetPlayerControler(other.GetComponent<PlayerControler>());
+            StartCoroutine(RespawnPickup());
         }
         
     }
-
-    private void SetOnCoolDown()
+    
+    private void ChooseRandomPickup()
     {
-        StartCoroutine(Cooldown());
+        randomIndex = Random.Range(0, PowerUp.Length);
+        SpriteRenderer.sprite = PowerUp[randomIndex].GetPowerUpSprite();
     }
 
-    IEnumerator Cooldown()
+    IEnumerator RespawnPickup()
     {
+        yield return new WaitForSeconds(timeBetweenPickups);
+        ChooseRandomPickup();
         isActive = true;
-        SpriteRenderer.color = InActiveColor;
-        yield return new WaitForSeconds(CooldownValue);
-        SpriteRenderer.color = ActiveColor;
-        isActive = false;
     }
 }
 

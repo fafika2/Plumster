@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3584065007845476569
@@ -101,12 +101,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 176b7ad29836c694e8b2d84627297efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CooldownValue: 3
+  pickups: []
+  timeBetweenPickups: 3
   isActive: 0
   SpriteRenderer: {fileID: 8070113172231631700}
-  ActiveColor: {r: 0, g: 0, b: 0, a: 0}
-  InActiveColor: {r: 1, g: 1, b: 1, a: 0.27450982}
-  PowerUp: {fileID: 0}
+  PowerUp:
+  - {fileID: 3763859317939023469, guid: 05c72e6019f1fd54c802ac912677d063, type: 3}
+  - {fileID: 5528670118989475600, guid: 30215a32e2b5a154e9ce87d7f3cb30a5, type: 3}
+  - {fileID: 6543368003113564289, guid: a4303d6cda5804e438f15027e2b5d771, type: 3}
 --- !u!58 &3821207292662360494
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerControler : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class PlayerControler : MonoBehaviour
     protected float currentHorizontalSpeed;
     protected float currentVerticalSpeed;
     protected float timeInAirAfterUngrounded;
+    [SerializeField] protected GameObject powerUpImage;
 
 
     protected void HandleOnMoveLeftRight(Vector2 value)
@@ -48,6 +51,9 @@ public class PlayerControler : MonoBehaviour
     public void SetCurrentPowerUp(PowerUpBase powerUp)
     {
         currentPowerUp = powerUp;
+        Debug.Log("Activating powerUpImage");
+        powerUpImage.gameObject.SetActive(true);
+        powerUpImage.GetComponent<Image>().sprite = currentPowerUp.GetPowerUpSprite();
     }
 
     public void RemoveCurrentPowerUp()

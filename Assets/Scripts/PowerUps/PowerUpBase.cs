@@ -6,6 +6,7 @@ public class PowerUpBase : MonoBehaviour
     [SerializeField] private int Uses;
     [SerializeField] protected float duration;
     [SerializeField] protected PlayerControler playerControler;
+    [SerializeField] protected Sprite powerUpSprite;
     
     public void UsePowerUp()
     {
@@ -29,5 +30,10 @@ public class PowerUpBase : MonoBehaviour
     public void SetPlayerControler(PlayerControler playerControler)
     {
         this.playerControler = playerControler;
+    }
+
+    public Sprite GetPowerUpSprite()
+    {
+        return powerUpSprite;
     }
 }

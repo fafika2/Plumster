@@ -6,6 +6,7 @@ public class PlayerTwoControler : PlayerControler
     [SerializeField] protected PlayerTwoInputReader inputReader;
     void OnEnable()
     {
+        powerUpImage = GameObject.FindGameObjectWithTag("RightPowerUp");
         inputReader.OnMoveLeftRightEvent += HandleOnMoveLeftRight;
         inputReader.OnJumpEvent += HandleJump;
         inputReader.OnActionEvent += HandleAction;
@@ -16,6 +17,11 @@ public class PlayerTwoControler : PlayerControler
         inputReader.OnMoveLeftRightEvent -= HandleOnMoveLeftRight;
         inputReader.OnJumpEvent -= HandleJump;
         inputReader.OnActionEvent -= HandleAction;
+    }
+
+    private void Start()
+    {
+        powerUpImage.SetActive(false);
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -40,13 +46,15 @@ public class PlayerTwoControler : PlayerControler
     {
         if (currentPowerUp != null && actionRequested)
         {
+            powerUpImage.SetActive(false);
             currentPowerUp.UsePowerUp();
+            actionRequested = false;
         }
     }
     private void MovementHorizontal()
     {
         rb2D.AddForce(new Vector2(movementVectorLeftRight.x *playerSettings.movementAcceleration, 0), ForceMode2D.Impulse);
-        rb2D.linearVelocity = new Vector2(Mathf.Clamp(rb2D.linearVelocity.x, -playerSettings.maxMovementSpeed, playerSettings.maxMovementSpeed), rb2D.linearVelocity.y);
+        rb2D.linearVelocity = new Vector2(Mathf.Clamp(rb2D.linearVelocity.x, -playerSettings.maxMovementSpeed, playerSettings.maxMovementSpeed), Mathf.Clamp(rb2D.linearVelocity.y, -playerSettings.maxMovementSpeed, playerSettings.maxMovementSpeed));
     }
 
     void OnDrawGizmosSelected()

@@ -6,6 +6,7 @@ public class PlayerOneControler : PlayerControler
     [SerializeField] protected PlayerOneInputReader inputReader;
     void OnEnable()
     {
+        powerUpImage = GameObject.FindGameObjectWithTag("LeftPowerUp");
         inputReader.OnMoveLeftRightEvent += HandleOnMoveLeftRight;
         inputReader.OnJumpEvent += HandleJump;
         inputReader.OnActionEvent += HandleAction;
@@ -17,7 +18,10 @@ public class PlayerOneControler : PlayerControler
         inputReader.OnJumpEvent -= HandleJump;
         inputReader.OnActionEvent -= HandleAction;
     }
-
+    private void Start()
+    {
+        powerUpImage.SetActive(false);
+    }
 
     
     // Update is called once per frame
@@ -43,6 +47,7 @@ public class PlayerOneControler : PlayerControler
     {
         if (currentPowerUp != null && actionRequested)
         {
+            powerUpImage.SetActive(false);
             currentPowerUp.UsePowerUp();
             actionRequested = false;
         }
