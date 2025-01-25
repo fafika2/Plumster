@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7397418322968862035}
   - component: {fileID: 8316597919203545960}
   - component: {fileID: 7986186486935982448}
+  - component: {fileID: 1479247205727101940}
   m_Layer: 3
   m_Name: Player1_2
   m_TagString: Player
@@ -168,6 +169,22 @@ MonoBehaviour:
   _collider2D: {fileID: 7397418322968862035}
   _playerRigidbody: {fileID: 1854678417278636410}
   _playerSlider: {fileID: 7275648070034950612}
+--- !u!114 &1479247205727101940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234404187420201664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 710d756fe1037cb4197a7d9ea62d1578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4255587196970138161}
+  playerSettings: {fileID: 11400000, guid: a3ba95017c1ec7144ba5ecc90687a677, type: 2}
+  _player1RigidBody2D: {fileID: 1854678417278636410}
+  _player2RigidBody2D: {fileID: 0}
 --- !u!1 &2895370706029367490
 GameObject:
   m_ObjectHideFlags: 0
