@@ -119,6 +119,83 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &15278913
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 58833649028066439, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 67472501447627584, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1180827448966677779, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729966121346044734, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4103122431270896099, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_Name
+      value: ChomikArena
+      objectReference: {fileID: 0}
+    - target: {fileID: 6429489571919114472, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_Creator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8734779138361569128, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e80d13acc4a594b48997c64e0cd77eac, type: 3}
 --- !u!95 &338798590 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1681752538543525192, guid: b12528d220f83624bb7acfebf58b2586, type: 3}
@@ -227,7 +304,7 @@ Transform:
   m_GameObject: {fileID: 1081045113}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.9, y: -1.25, z: 0}
+  m_LocalPosition: {x: -17.96, y: 5.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -445,7 +522,7 @@ Transform:
   m_GameObject: {fileID: 1845936593}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.60000014, y: -1.25, z: 0}
+  m_LocalPosition: {x: 7, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -596,38 +673,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4042441825736495793, guid: 43cff519270ebc442a612efa344ba4cd, type: 3}
-      propertyPath: Targets.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042441825736495793, guid: 43cff519270ebc442a612efa344ba4cd, type: 3}
-      propertyPath: Targets.Array.data[0].Object
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4042441825736495793, guid: 43cff519270ebc442a612efa344ba4cd, type: 3}
-      propertyPath: Targets.Array.data[1].Object
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5592395120002546574, guid: 43cff519270ebc442a612efa344ba4cd, type: 3}
-      propertyPath: orthographic size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6303945066820334851, guid: 43cff519270ebc442a612efa344ba4cd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6303945066820334851, guid: 43cff519270ebc442a612efa344ba4cd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.45000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 7508915199541247887, guid: 43cff519270ebc442a612efa344ba4cd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7508915199541247887, guid: 43cff519270ebc442a612efa344ba4cd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7618560506232787548, guid: 43cff519270ebc442a612efa344ba4cd, type: 3}
       propertyPath: m_Name
       value: CameraObject
@@ -648,3 +693,4 @@ SceneRoots:
   - {fileID: 3475490635777828708}
   - {fileID: 1551337508}
   - {fileID: 1503822900}
+  - {fileID: 15278913}
