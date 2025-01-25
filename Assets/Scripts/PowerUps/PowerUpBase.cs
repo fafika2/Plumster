@@ -1,19 +1,16 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PowerUpBase : MonoBehaviour
 {
     [SerializeField] private int Uses;
-    [SerializeField] float workingTime;
+    [SerializeField] protected float duration;
     [SerializeField] protected PlayerControler playerControler;
     
     public void UsePowerUp()
     {
         Uses--;
         PowerUpEffect();
-        if (Uses <= 0)
-        {
-            RemovePowerUp();
-        }
     }
 
     public void RemovePowerUp()
@@ -23,7 +20,10 @@ public class PowerUpBase : MonoBehaviour
 
     public virtual void PowerUpEffect()
     {
-        Debug.Log("PowerUpEffect used");
+        if (Uses <= 0)
+        {
+            RemovePowerUp();
+        }
     }
 
     public void SetPlayerControler(PlayerControler playerControler)
