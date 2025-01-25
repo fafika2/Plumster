@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private float _maxHealth = 100;
-    [SerializeField] private float _currentHealth = 100;
+    public float currentHealth = 100;
     [Header("Player Death")]
     [SerializeField] private GameObject[] _objectsToDisable;
     [SerializeField] private GameObject _vfxObject;
@@ -17,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void KillPlayer()
     {
-        if (_currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             _playerControler.enabled = false;
             _collider2D.enabled = false;
@@ -34,12 +35,15 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        _currentHealth -= damage;
-        var SliderValue = _currentHealth / _maxHealth;
+        currentHealth -= damage;
+        var SliderValue = currentHealth / _maxHealth;
         _playerSlider.value = SliderValue;
         KillPlayer();
     }
 
-
+    public void KillInstant()
+    {
+        TakeDamage(100);
+    }
 
 }
