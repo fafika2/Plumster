@@ -25,14 +25,17 @@ public class PlayerSlowField : MonoBehaviour
     private void MaxSlowPlayer(GameObject Player)
     {
         var PlayerRigidbody2D = Player.GetComponent<Rigidbody2D>();
-        PlayerRigidbody2D.linearVelocity = PlayerRigidbody2D.linearVelocity.normalized * _maxSlowness;
+        if (Mathf.Abs(PlayerRigidbody2D.linearVelocityX) > _maxSlowness)
+        {
+            PlayerRigidbody2D.linearVelocityX = Mathf.Clamp(PlayerRigidbody2D.linearVelocityX,-_maxSlowness,_maxSlowness);
+            
+        }
     }
 
     private void SlowPlayer(GameObject Player)
     {
         var Slowness = (100f - _slownessPercentage)/100;
         var PlayerRigidbody2D = Player.GetComponent<Rigidbody2D>();
-        Debug.Log(Slowness);
         PlayerRigidbody2D.linearVelocity *= Slowness;
     }
 }
