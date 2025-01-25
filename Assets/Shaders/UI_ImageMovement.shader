@@ -63,6 +63,7 @@ Shader "UI_ImageMovement"
             #pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
             #include "UnityShaderVariables.cginc"
+            #define ASE_NEEDS_FRAG_COLOR
 
 
             struct appdata_t
@@ -136,7 +137,7 @@ Shader "UI_ImageMovement"
                 float2 appendResult15 = (float2(( _SpeedDirection.x * _SinTime.y ) , ( _SinTime.z * _SpeedDirection.y )));
                 
 
-                half4 color = tex2D( _TextureSample0, (texCoord4*1.0 + appendResult15) );
+                half4 color = ( tex2D( _TextureSample0, (texCoord4*1.0 + appendResult15) ) * IN.color );
 
                 #ifdef UNITY_UI_CLIP_RECT
                 half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(IN.mask.xy)) * IN.mask.zw);
@@ -161,13 +162,15 @@ Shader "UI_ImageMovement"
 /*ASEBEGIN
 Version=19801
 Node;AmplifyShaderEditor.SinTimeNode;17;-1696,-32;Inherit;False;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.Vector2Node;10;-1632,160;Inherit;False;Property;_SpeedDirection;SpeedDirection;1;0;Create;True;0;0;0;False;0;False;0.1,0.1;0.001,0.001;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.Vector2Node;10;-1632,160;Inherit;False;Property;_SpeedDirection;SpeedDirection;1;0;Create;True;0;0;0;False;0;False;0.1,0.1;0.1,0.1;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;12;-1424,96;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;11;-1440,-48;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0.2;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;4;-1632,-304;Inherit;True;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.DynamicAppendNode;15;-1248,-64;Inherit;False;FLOAT2;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.ScaleAndOffsetNode;6;-1040,-160;Inherit;False;3;0;FLOAT2;0,0;False;1;FLOAT;1;False;2;FLOAT2;0,0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.SamplerNode;2;-800,-160;Inherit;True;Property;_TextureSample0;Texture Sample 0;0;0;Create;True;0;0;0;False;0;False;-1;449419e8760023544b6d46abdc0f4b73;449419e8760023544b6d46abdc0f4b73;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;6;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT3;5
+Node;AmplifyShaderEditor.VertexColorNode;18;-720,128;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;19;-385.7686,-95.5943;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;0,0;Float;False;True;-1;3;AmplifyShaderEditor.MaterialInspector;0;3;UI_ImageMovement;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;3;1;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;False;0;;0;0;Standard;0;0;1;True;False;;False;0
 WireConnection;12;0;17;3
 WireConnection;12;1;10;2
@@ -178,6 +181,8 @@ WireConnection;15;1;12;0
 WireConnection;6;0;4;0
 WireConnection;6;2;15;0
 WireConnection;2;1;6;0
-WireConnection;1;0;2;0
+WireConnection;19;0;2;0
+WireConnection;19;1;18;0
+WireConnection;1;0;19;0
 ASEEND*/
-//CHKSM=043ABE123285093B55FAEBBB5456E65C2A23893B
+//CHKSM=F36499D7F14FED277738EB13161EC8B59D8BA826
