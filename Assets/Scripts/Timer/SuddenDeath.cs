@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SuddenDeath : MonoBehaviour
 {
-    [SerializeField] PlayerHealth _player1Health;
-    [SerializeField] PlayerHealth _player2Health;
+    public PlayerHealth _player1Health;
+    public PlayerHealth _player2Health;
     public void SuddenDeathInvoke()
     {
         if( _player1Health.currentHealth > _player2Health.currentHealth)

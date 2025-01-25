@@ -5,13 +5,15 @@ using UnityEngine.Events;
 
 public class DoSomethingWhenTimerCount : MonoBehaviour
 {
-    [SerializeField] private float _timeRemaining = 45;
+    [SerializeField] float _timeRemaining = 45;
     [SerializeField] private UnityEvent _unityEvent;
     [SerializeField] private TextMeshProUGUI _textMeshProUGUI;
+    private float _timeCache = 0;
     public bool CanCount = true;
 
     private void Start()
     {
+        _timeCache = _timeRemaining;
         _textMeshProUGUI.text = Mathf.Round(_timeRemaining).ToString();
     }
 
@@ -26,5 +28,10 @@ public class DoSomethingWhenTimerCount : MonoBehaviour
         {
             _unityEvent.Invoke();
         }
+    }
+    
+    public void ResetTime()
+    {
+        _timeRemaining = _timeCache;
     }
 }

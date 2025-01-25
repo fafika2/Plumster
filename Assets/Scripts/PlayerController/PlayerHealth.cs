@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private SO_Score score;
     [SerializeField] private bool Player1;
     [SerializeField] private bool Player2;
+    [SerializeField] private UpdateScore _updateScore;
     [Header("Heatlh Bar")]
     [SerializeField] private Slider _playerSlider;
 
@@ -26,6 +27,16 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         matchManager = FindFirstObjectByType<MatchManager>();
+        _updateScore = FindFirstObjectByType<UpdateScore>();
+        if (Player1)
+        {
+            FindFirstObjectByType<SuddenDeath>()._player1Health = this.gameObject.GetComponent<PlayerHealth>();
+        }
+        else
+        {
+            FindFirstObjectByType<SuddenDeath>()._player2Health = this.gameObject.GetComponent<PlayerHealth>();
+        }
+        
     }
     private void KillPlayer()
     {
@@ -42,11 +53,14 @@ public class PlayerHealth : MonoBehaviour
             if (Player1)
             {
                 score.ScorePlayer2++;
+                _updateScore.UpdateScoreText();
             }
             else if (Player2)
             {
                 score.ScorePlayer1++;
+                _updateScore.UpdateScoreText();
             }
+            
             matchManager.RestartGame();
         }
     }

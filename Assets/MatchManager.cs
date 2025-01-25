@@ -12,6 +12,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private CinemachineTargetGroup TargetGroup;
     [SerializeField] private SO_Score score;
     [SerializeField] private UpdateScore updateScore;
+    [SerializeField] private DoSomethingWhenTimerCount _timer;
 
 
     public void Awake()
@@ -20,8 +21,9 @@ public class MatchManager : MonoBehaviour
     }
     public void StartGame()
     {
+        _timer.CanCount = true;
         foreach (GameObject player in spawnedPlayers)
-        {
+        {   
             player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             player.GetComponent<PlayerControler>().enabled = true;
         }
@@ -34,6 +36,8 @@ public class MatchManager : MonoBehaviour
 
     public void RestartGame()
     {
+        _timer.CanCount = false;
+        _timer.ResetTime();
         StartCoroutine(RestartGameCoroutine());
     }
 
@@ -67,8 +71,6 @@ public class MatchManager : MonoBehaviour
             Destroy(spawnedPlayers[i]);
         }
         spawnedPlayers.Clear();
-        
-        updateScore.UpdateScoreText();
         StartCoroutine(StartGameCoroutine());
     }
     
