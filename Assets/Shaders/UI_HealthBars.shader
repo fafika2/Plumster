@@ -19,6 +19,7 @@ Shader "UI_HealthBars"
 
         _PixelCount("PixelCount", Vector) = (64,64,0,0)
         _NoiseScale("NoiseScale", Float) = 3
+        _PosterizeScale("PosterizeScale", Float) = 12.8
         _BlackIntensity("BlackIntensity", Range( 0 , 1)) = 1
         _SpeedDirection("SpeedDirection", Vector) = (-0.2,0,0,0)
 
@@ -85,7 +86,7 @@ Shader "UI_HealthBars"
                 float4 worldPosition : TEXCOORD1;
                 float4  mask : TEXCOORD2;
                 UNITY_VERTEX_OUTPUT_STEREO
-                
+                float4 ase_texcoord3 : TEXCOORD3;
             };
 
             sampler2D _MainTex;
@@ -96,6 +97,7 @@ Shader "UI_HealthBars"
             float _UIMaskSoftnessX;
             float _UIMaskSoftnessY;
 
+            uniform float _PosterizeScale;
             uniform float2 _SpeedDirection;
             uniform float2 _PixelCount;
             uniform float _NoiseScale;
@@ -136,7 +138,12 @@ Shader "UI_HealthBars"
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
 
+                float3 ase_positionWS = mul( unity_ObjectToWorld, float4( ( v.vertex ).xyz, 1 ) ).xyz;
+                OUT.ase_texcoord3.xyz = ase_positionWS;
                 
+                
+                //setting value to unused interpolator channels and avoid initialization warnings
+                OUT.ase_texcoord3.w = 0;
 
                 v.vertex.xyz +=  float3( 0, 0, 0 ) ;
 
@@ -165,20 +172,23 @@ Shader "UI_HealthBars"
                 const half invAlphaPrecision = half(1.0/alphaPrecision);
                 IN.color.a = round(IN.color.a * alphaPrecision)*invAlphaPrecision;
 
-                float2 texCoord4 = IN.texcoord.xy * float2( 1,1 ) + float2( 0,0 );
+                float3 ase_positionWS = IN.ase_texcoord3.xyz;
+                float2 texCoord4 = IN.texcoord.xy * float2( 1,1 ) + ( ase_positionWS * 0.01 ).xy;
                 float pixelWidth3 =  1.0f / _PixelCount.x;
                 float pixelHeight3 = 1.0f / _PixelCount.y;
                 half2 pixelateduv3 = half2((int)(texCoord4.x / pixelWidth3) * pixelWidth3, (int)(texCoord4.y / pixelHeight3) * pixelHeight3);
                 float2 panner10 = ( 1.0 * _Time.y * _SpeedDirection + pixelateduv3);
                 float simplePerlin2D2 = snoise( panner10*_NoiseScale );
                 simplePerlin2D2 = simplePerlin2D2*0.5 + 0.5;
-                float4 temp_cast_1 = (simplePerlin2D2).xxxx;
-                float div6=256.0/float((int)12.8);
-                float4 posterize6 = ( floor( temp_cast_1 * div6 ) / div6 );
-                float4 temp_cast_2 = (_BlackIntensity).xxxx;
+                float4 temp_cast_2 = (simplePerlin2D2).xxxx;
+                float div6=256.0/float((int)_PosterizeScale);
+                float4 posterize6 = ( floor( temp_cast_2 * div6 ) / div6 );
+                float4 temp_cast_3 = (_BlackIntensity).xxxx;
+                float4 blendOpSrc29 = pow( posterize6 , temp_cast_3 );
+                float4 blendOpDest29 = IN.color;
                 
 
-                half4 color = ( pow( posterize6 , temp_cast_2 ) * IN.color );
+                half4 color = ( saturate( 2.0f*blendOpDest29*blendOpSrc29 + blendOpDest29*blendOpDest29*(1.0f - 2.0f*blendOpSrc29) ));
 
                 #ifdef UNITY_UI_CLIP_RECT
                 half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(IN.mask.xy)) * IN.mask.zw);
@@ -202,20 +212,26 @@ Shader "UI_HealthBars"
 }
 /*ASEBEGIN
 Version=19801
-Node;AmplifyShaderEditor.TextureCoordinatesNode;4;-2016,-48;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.WorldPosInputsNode;24;-3120,-160;Inherit;True;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.RangedFloatNode;27;-3024,16;Inherit;False;Constant;_Float0;Float 0;4;0;Create;True;0;0;0;False;0;False;0.01;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;26;-2704,-128;Inherit;False;2;2;0;FLOAT3;0,0,0;False;1;FLOAT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.TextureCoordinatesNode;4;-2400,-160;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.Vector2Node;18;-1936,144;Inherit;False;Property;_PixelCount;PixelCount;0;0;Create;True;0;0;0;False;0;False;64,64;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.TFHCPixelate;3;-1632,-112;Inherit;True;3;0;FLOAT2;0,0;False;1;FLOAT;5;False;2;FLOAT;5;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.Vector2Node;21;-1536,128;Inherit;False;Property;_SpeedDirection;SpeedDirection;3;0;Create;True;0;0;0;False;0;False;-0.2,0;-0.2,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
+Node;AmplifyShaderEditor.Vector2Node;21;-1536,128;Inherit;False;Property;_SpeedDirection;SpeedDirection;4;0;Create;True;0;0;0;False;0;False;-0.2,0;-0.2,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.PannerNode;10;-1296,-96;Inherit;False;3;0;FLOAT2;0,0;False;2;FLOAT2;-0.1,0;False;1;FLOAT;1;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.RangedFloatNode;19;-1280,112;Inherit;False;Property;_NoiseScale;NoiseScale;1;0;Create;True;0;0;0;False;0;False;3;3;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.NoiseGeneratorNode;2;-1008,-48;Inherit;True;Simplex2D;True;False;2;0;FLOAT2;0,0;False;1;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;9;-944,176;Inherit;False;Constant;_NoiseScale1;NoiseScale;1;0;Create;True;0;0;0;False;0;False;12.8;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;9;-944,176;Inherit;False;Property;_PosterizeScale;PosterizeScale;2;0;Create;True;0;0;0;False;0;False;12.8;12.8;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.PosterizeNode;6;-704,-64;Inherit;True;42;2;1;COLOR;0,0,0,0;False;0;INT;42;False;1;COLOR;0
-Node;AmplifyShaderEditor.RangedFloatNode;17;-736,-144;Inherit;False;Property;_BlackIntensity;BlackIntensity;2;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;17;-736,-144;Inherit;False;Property;_BlackIntensity;BlackIntensity;3;0;Create;True;0;0;0;False;0;False;1;1;0;1;0;1;FLOAT;0
 Node;AmplifyShaderEditor.VertexColorNode;13;-448,256;Inherit;False;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.PowerNode;16;-336,-96;Inherit;True;False;2;0;COLOR;0,0,0,0;False;1;FLOAT;1.2;False;1;COLOR;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;14;-32,32;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.BlendOpsNode;29;-80,-16;Inherit;True;SoftLight;True;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;1;False;1;COLOR;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;208,0;Float;False;True;-1;3;AmplifyShaderEditor.MaterialInspector;0;3;UI_HealthBars;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;False;True;3;1;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;True;True;True;True;True;0;True;_ColorMask;False;False;False;False;False;False;False;True;True;0;True;_Stencil;255;True;_StencilReadMask;255;True;_StencilWriteMask;0;True;_StencilComp;0;True;_StencilOp;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;0;True;unity_GUIZTestMode;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;False;0;;0;0;Standard;0;0;1;True;False;;False;0
+WireConnection;26;0;24;0
+WireConnection;26;1;27;0
+WireConnection;4;1;26;0
 WireConnection;3;0;4;0
 WireConnection;3;1;18;1
 WireConnection;3;2;18;2
@@ -227,8 +243,8 @@ WireConnection;6;1;2;0
 WireConnection;6;0;9;0
 WireConnection;16;0;6;0
 WireConnection;16;1;17;0
-WireConnection;14;0;16;0
-WireConnection;14;1;13;0
-WireConnection;1;0;14;0
+WireConnection;29;0;16;0
+WireConnection;29;1;13;0
+WireConnection;1;0;29;0
 ASEEND*/
-//CHKSM=C04FA8B790317DED31E3E7066B510EF4493768BA
+//CHKSM=7D7CE7CCE9189C9EE3CD9FFA6024E4C24C52F64D
