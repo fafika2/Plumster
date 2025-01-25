@@ -12,17 +12,20 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 6fbeff5af5049e6479986b0af6a0bdb0
   - enabled: 1
-    path: Assets/Scenes/Arena1_Chowder.unity
-    guid: 1c73608990417164cb42ebf4e64f41b6
-  - enabled: 1
     path: Assets/Scenes/Player1Win.unity
     guid: bee18df5eb11a5b41983c87cd242cacd
   - enabled: 1
+    path: Assets/Scenes/BasicMapSettings/SpaceKotArena.unity
+    guid: 95ba424e534715a49a3916c9ee2a842b
+  - enabled: 1
+    path: Assets/Scenes/BasicMapSettings/AngryRabbitMap.unity
+    guid: 622e458a6181ea5498987e1747d1e1b8
+  - enabled: 1
+    path: Assets/Scenes/BasicMapSettings/ChomikSettings.unity
+    guid: 6517e6a2dff9e5042939b1194630bd6e
+  - enabled: 1
     path: Assets/Scenes/Player2Win.unity
     guid: 6826c3c3123b841489af03968da61c32
-  - enabled: 1
-    path: Assets/Scenes/ChowderScene.unity
-    guid: 158cf336a56e6214899b737295f196c7
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
