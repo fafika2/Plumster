@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TextPulsing : MonoBehaviour
 {
-    [SerializeField] TextMeshPro textMeshPro;
+    [SerializeField] TextMeshProUGUI textMeshPro;
     public float pingPongDuration = 2f;  // Duration of the alpha ping-pong cycle
     private Color originalColor;         // Store the original color
 
