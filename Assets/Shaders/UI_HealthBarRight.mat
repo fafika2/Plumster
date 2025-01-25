@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UI_HealthBars
+  m_Name: UI_HealthBarRight
   m_Shader: {fileID: 4800000, guid: f7cdcad1bf0b50d4688180e1e1a34fd0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,10 +29,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlackIntensity: 0.324
+    - _BlackIntensity: 1
     - _ColorMask: 15
-    - _NoiseScale: 10
+    - _NoiseScale: 1
     - _PixelScale: 12
+    - _PosterizeScale: 85
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -41,7 +42,7 @@ Material:
     - _UseUIAlphaClip: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _PixelCount: {r: 32, g: 8, b: 0, a: 0}
-    - _SpeedDirection: {r: -0.1, g: 0, b: 0, a: 0}
+    - _PixelCount: {r: 5, g: 4, b: 0, a: 0}
+    - _SpeedDirection: {r: 0, g: -0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
