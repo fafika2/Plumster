@@ -39,22 +39,6 @@ public class PlayerTwoControler : PlayerControler
         rb2D.AddForce(new Vector2(movementVectorLeftRight.x *playerSettings.movementAcceleration, 0), ForceMode2D.Impulse);
         rb2D.linearVelocity = new Vector2(Mathf.Clamp(rb2D.linearVelocity.x, -playerSettings.maxMovementSpeed, playerSettings.maxMovementSpeed), rb2D.linearVelocity.y);
     }
-    
-    private void HandleOnMoveLeftRight(Vector2 value)
-    {
-        Debug.Log(value);
-        movementVectorLeftRight = value;
-    }
-
-    private void HandleJump(bool value)
-    {
-        isJumping = value;
-    }
-    
-    private void HandleAction(bool value)
-    {
-        actionRequested = value;
-    }
 
     void OnDrawGizmosSelected()
     {
