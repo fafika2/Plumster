@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MatchManager : MonoBehaviour
 {
@@ -13,6 +13,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private SO_Score score;
     [SerializeField] private UpdateScore updateScore;
     [SerializeField] private DoSomethingWhenTimerCount _timer;
+    [SerializeField] private Animator _fadeInOutAnimator;
 
 
     public void Awake()
@@ -31,14 +32,31 @@ public class MatchManager : MonoBehaviour
 
     public void EndGame()
     {
-        score.ResetScore();
+        Invoke("FadeIn", 1f);
+        if(score.ScorePlayer1 >= 3)
+        {
+            Invoke("LoadPlayer1WinScene", 2f);
+        }
+        else if(score.ScorePlayer2 >= 3)
+        {
+            Invoke("LoadPlayer2WinScene", 2f);
+        }
+        _timer.CanCount = false;
     }
 
     public void RestartGame()
     {
-        _timer.CanCount = false;
-        _timer.ResetTime();
-        StartCoroutine(RestartGameCoroutine());
+        if(score.ScorePlayer1 >= 3 || score.ScorePlayer2 >= 3)
+        {
+            EndGame();
+        }
+        else
+        {
+            Invoke("FadeIn", 1f);
+            _timer.CanCount = false;
+            _timer.ResetTime();
+            StartCoroutine(RestartGameCoroutine());
+        }
     }
 
     public void PreparePlayers()
@@ -56,6 +74,7 @@ public class MatchManager : MonoBehaviour
     
     IEnumerator StartGameCoroutine()
     {
+        _fadeInOutAnimator.SetBool("FadeIn", false);
         PreparePlayers();
         yield return new WaitForSeconds(3f);
         StartGame();
@@ -74,4 +93,18 @@ public class MatchManager : MonoBehaviour
         StartCoroutine(StartGameCoroutine());
     }
     
+    private void FadeIn()
+    {
+        _fadeInOutAnimator.SetBool("FadeIn", true);
+    }
+
+    private void LoadPlayer1WinScene()
+    {
+        SceneManager.LoadScene("Player1Win");
+    }
+
+    private void LoadPlayer2WinScene()
+    {
+        SceneManager.LoadScene("Player2Win");
+    }
 }
