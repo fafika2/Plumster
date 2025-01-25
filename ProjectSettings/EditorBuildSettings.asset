@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 6fbeff5af5049e6479986b0af6a0bdb0
   - enabled: 1
-    path: Assets/Scenes/Player1Win.unity
-    guid: bee18df5eb11a5b41983c87cd242cacd
+    path: Assets/Scenes/CharacterShow.unity
+    guid: fcc2dce3fae494342810f99d3df46606
   - enabled: 1
     path: Assets/Scenes/BasicMapSettings/SpaceKotArena.unity
     guid: 95ba424e534715a49a3916c9ee2a842b
@@ -21,8 +21,14 @@ EditorBuildSettings:
     path: Assets/Scenes/BasicMapSettings/AngryRabbitMap.unity
     guid: 622e458a6181ea5498987e1747d1e1b8
   - enabled: 1
+    path: Assets/Scenes/BasicMapSettings/FinalDestination.unity
+    guid: 8fdb2f65c780c2849ac566a5839d7557
+  - enabled: 1
     path: Assets/Scenes/BasicMapSettings/ChomikSettings.unity
     guid: 6517e6a2dff9e5042939b1194630bd6e
+  - enabled: 1
+    path: Assets/Scenes/Player1Win.unity
+    guid: bee18df5eb11a5b41983c87cd242cacd
   - enabled: 1
     path: Assets/Scenes/Player2Win.unity
     guid: 6826c3c3123b841489af03968da61c32

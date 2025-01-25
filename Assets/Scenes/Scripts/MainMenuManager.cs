@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField] private string[] SceneToLoad;
+    [SerializeField] private string SceneToLoad;
 
     [SerializeField] private SO_Score score;
     [SerializeField] private Animator _fadeInAnimator;
@@ -19,7 +19,6 @@ public class MainMenuManager : MonoBehaviour
     private void LoadGame()
     {
         score.ResetScore();
-        var RandomNumber = Random.Range(0, SceneToLoad.Length);
-        SceneManager.LoadScene(SceneToLoad[RandomNumber]);
+        SceneManager.LoadScene(SceneToLoad);
     }
 }

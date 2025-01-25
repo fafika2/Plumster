@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3424014744169082471}
   - component: {fileID: 2259081040112357123}
   - component: {fileID: 2982208387063266087}
+  - component: {fileID: 5248809167776142982}
   m_Layer: 0
   m_Name: AnyDirectionBooster
   m_TagString: Untagged
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.36967182, b: 0.33333337, a: 0.08627451}
+  m_Sprite: {fileID: 21300000, guid: a00378d00586a2944a74b2614f1b1790, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -138,3 +139,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _boosterStrength: 1000
+--- !u!114 &5248809167776142982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6282818815606922558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780430f4124b8674fa10b531da7546aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 500
