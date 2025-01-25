@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,83 +7,67 @@ public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private PlayerControler player;
     [SerializeField] private PlayerSettings playerSettings;
-    [SerializeField] private string playerName;
+    [SerializeField] private Rigidbody2D _player1RigidBody2D, _player2RigidBody2D;
+    
+    private Vector2 _player1Velocity, _player2Velocity;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (other.CompareTag("Player") && other.gameObject != this.gameObject)
+            _player1Velocity = _player1RigidBody2D.linearVelocity;
+            _player2Velocity = _player2RigidBody2D.linearVelocity;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
         {
-            Vector2 playerVelocity = player.GetRigidBody2d().linearVelocity;
-            float playerVelocityX = playerVelocity.x;
-            float positivePlayerVelocityX = Mathf.Abs(playerVelocityX);
-            float playerVelocityY = playerVelocity.y;
-            float positivePlayerVelocityY = Mathf.Abs(playerVelocityY);
-            Debug.Log(positivePlayerVelocityX);
-            
-            Vector2 enemyVelocity = other.gameObject.GetComponent<Rigidbody2D>().linearVelocity;
-            float enemyVelocityX = enemyVelocity.x;
-            float positiveEnemyVelocityX = Mathf.Abs(enemyVelocityX);
-            float enemyVelocityY = enemyVelocity.y;
-            float positiveEnemyVelocityY = Mathf.Abs(enemyVelocityY);
-            
-            
-            float sumUpVelocityEnemy = Mathf.Clamp(positiveEnemyVelocityX + positiveEnemyVelocityY, 1 ,playerSettings.maxMovementSpeed/4);
-            Debug.Log($"sumUpVelocityEnemy {sumUpVelocityEnemy}");
-            float sumUpVelocityPlayer = Mathf.Clamp(positivePlayerVelocityX + positivePlayerVelocityY , 1 ,playerSettings.maxMovementSpeed/4);
-            Debug.Log($"sumUpVelocityEnemy {sumUpVelocityPlayer}");
-            
-            Debug.Log($"CALLED BY {playerName}: Player velocity equals {sumUpVelocityPlayer}, enemy velocity equals {sumUpVelocityEnemy}");
-            if (sumUpVelocityPlayer >  sumUpVelocityEnemy)
+            var Player1VelocitySum = Mathf.Abs(_player1Velocity.x) + Mathf.Abs(_player1Velocity.y);
+            var Player2VelocitySum = Mathf.Abs(_player2Velocity.x) + Mathf.Abs(_player2Velocity.y);
+
+            var Player1Position = transform;
+            var Player2Position = collision.gameObject.transform;
+
+            var Player1Direction = Player1Position.position - Player2Position.position + Player1Position.transform.up;
+            var Player2Direction = Player2Position.position - Player1Position.position + Player2Position.transform.up;
+
+            if (Player1VelocitySum == Player2VelocitySum)
             {
-                Debug.Log($" {playerName} Velocity is higher then enemy Velocity");
+                _player1RigidBody2D.linearVelocity = Vector2.zero;
+                _player1RigidBody2D.AddForce(Player1Direction.normalized * playerSettings.CollisionPower, ForceMode2D.Impulse);
 
-                Vector2 cachedVelocityPlayer1 = playerVelocity.normalized;
-                float differenceInVelocity = sumUpVelocityEnemy / sumUpVelocityPlayer;
-                float roundedFloat = Mathf.Round(differenceInVelocity * 100f) * 0.1f;
-                Debug.Log($"Player has higher velocity {differenceInVelocity}");
-                
-                other.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-                other.GetComponent<Rigidbody2D>().AddForce(cachedVelocityPlayer1 * Mathf.Sign(sumUpVelocityPlayer) * playerSettings.CollisionPower  , ForceMode2D.Impulse);
-                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up  * 100, ForceMode2D.Impulse);
-
-                player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-                player.GetComponent<Rigidbody2D>().AddForce(cachedVelocityPlayer1 * -1 * playerSettings.CollisionPower * roundedFloat, ForceMode2D.Impulse);
-                player.GetComponent<Rigidbody2D>().AddForce(Vector2.up  * 100, ForceMode2D.Impulse);
-                
+                _player2RigidBody2D.linearVelocity = Vector2.zero;
+                _player2RigidBody2D.AddForce(Player2Direction.normalized * playerSettings.CollisionPower, ForceMode2D.Impulse);
             }
-            
-            else if (sumUpVelocityPlayer <  sumUpVelocityEnemy)
+            else if (Player1VelocitySum > Player2VelocitySum)
             {
-                Vector2 cachedVelocityPlayer1 = new Vector2 (Mathf.Sign(playerVelocityX), Mathf.Sign(playerVelocityY));
-                float differenceInVelocity = sumUpVelocityEnemy / sumUpVelocityPlayer;
-                float roundedFloat = Mathf.Round(differenceInVelocity * 10f) * 0.1f;
-                Debug.Log($"Enemy has higher velocity {differenceInVelocity}");
+                var Difference = Player2VelocitySum / Player1VelocitySum;
+                var VelocityDif = Player1VelocitySum - Player2VelocitySum;
+                DoDamage(Player2Position.gameObject, VelocityDif);
 
-                player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-                player.GetComponent<Rigidbody2D>().AddForce(cachedVelocityPlayer1 * playerSettings.CollisionPower  , ForceMode2D.Impulse);
-                player.GetComponent<Rigidbody2D>().AddForce(Vector2.up  * 500, ForceMode2D.Impulse);
+                _player1RigidBody2D.linearVelocity = Vector2.zero;
+                _player1RigidBody2D.AddForce(Player1Direction.normalized * playerSettings.CollisionPower * Difference, ForceMode2D.Impulse);
 
-                other.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-                other.GetComponent<Rigidbody2D>().AddForce(cachedVelocityPlayer1 * -1 * playerSettings.CollisionPower * roundedFloat, ForceMode2D.Impulse);
-                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up  * 500, ForceMode2D.Impulse);
+                _player2RigidBody2D.linearVelocity = Vector2.zero;
+                _player2RigidBody2D.AddForce(Player2Direction.normalized * playerSettings.CollisionPower, ForceMode2D.Impulse);
             }
             else
             {
-                Vector2 cachedVelocityPlayer1 = new Vector2 (Mathf.Sign(playerVelocityX), Mathf.Sign(playerVelocityY));
-                float differenceInVelocity = sumUpVelocityEnemy / sumUpVelocityPlayer;
-                float roundedFloat = Mathf.Round(differenceInVelocity * 10f) * 0.1f;
-                Debug.Log($"Enemy has higher velocity {differenceInVelocity}");
+                var Difference = Player1VelocitySum / Player2VelocitySum;
+                var VelocityDif = Player2VelocitySum - Player1VelocitySum;
+                DoDamage(Player1Position.gameObject, VelocityDif);
 
-                player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-                player.GetComponent<Rigidbody2D>().AddForce(cachedVelocityPlayer1 * playerSettings.CollisionPower, ForceMode2D.Impulse);
-                player.GetComponent<Rigidbody2D>().AddForce(Vector2.up  * 500, ForceMode2D.Impulse);
+                _player1RigidBody2D.linearVelocity = Vector2.zero;
+                _player1RigidBody2D.AddForce(Player1Direction.normalized * playerSettings.CollisionPower, ForceMode2D.Impulse);
 
-                other.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
-                other.GetComponent<Rigidbody2D>().AddForce(cachedVelocityPlayer1 * -1 * playerSettings.CollisionPower, ForceMode2D.Impulse);
-                other.GetComponent<Rigidbody2D>().AddForce(Vector2.up  * 500, ForceMode2D.Impulse);
+                _player2RigidBody2D.linearVelocity = Vector2.zero;
+                _player2RigidBody2D.AddForce(Player2Direction.normalized * playerSettings.CollisionPower * Difference, ForceMode2D.Impulse);
             }
-            
         }
-        
+    }
+
+    private void DoDamage(GameObject Object, float DamageCount)
+    {
+        var DamageSettings = Object.GetComponent<PlayerHealth>();
+        DamageSettings.TakeDamage(DamageCount);
     }
 }

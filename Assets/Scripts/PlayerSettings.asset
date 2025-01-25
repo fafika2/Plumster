@@ -12,21 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406c8ef617f4ae342bad953f590cc6ec, type: 3}
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  SnapInput: 1
-  VerticalDeadZoneThreshold: 0.3
-  HorizontalDeadZoneThreshold: 0.3
   maxMovementSpeed: 28
   movementAcceleration: 30
-  movementGroundDeceleration: 60
-  AirDeceleration: 30
-  GroundingForce: -1.5
   GrounderCheckCollider: 0.25
   JumpPower: 700
-  MaxFallSpeed: 40
-  FallAcceleration: 110
-  JumpEndEarlyGravityModifier: 3
-  CoyoteTime: 0.15
-  JumpBuffer: 0.2
+  CollisionPower: 750
