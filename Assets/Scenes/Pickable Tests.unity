@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: canMove
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6016795292564337589, guid: f0231fa436e6a384382a39c36be0182a, type: 3}
+      propertyPath: Player2
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6995653324996024170, guid: f0231fa436e6a384382a39c36be0182a, type: 3}
       propertyPath: m_Name
       value: Player2_2
@@ -562,6 +566,10 @@ PrefabInstance:
     - target: {fileID: 7523382574373249710, guid: ccf5ee866408fe34d88a981d26f8af3c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7986186486935982448, guid: ccf5ee866408fe34d88a981d26f8af3c, type: 3}
+      propertyPath: Player1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8358229376531018186, guid: ccf5ee866408fe34d88a981d26f8af3c, type: 3}
       propertyPath: m_AnchorMax.x

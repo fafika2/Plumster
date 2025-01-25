@@ -8,6 +8,7 @@ public class SO_Score : ScriptableObject
         ScorePlayer1 = 0;
         ScorePlayer2 = 0;
     }
+    
     public int ScorePlayer1;
     public int ScorePlayer2;
 }

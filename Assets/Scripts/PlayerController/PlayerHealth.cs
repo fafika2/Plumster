@@ -1,6 +1,4 @@
 using System.Collections;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,11 +12,21 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private PlayerControler _playerControler;
     [SerializeField] private Collider2D _collider2D;
     [SerializeField] private Rigidbody2D _playerRigidbody;
+    [Header("Score")]
+    [SerializeField] private SO_Score score;
+    [SerializeField] private bool Player1;
+    [SerializeField] private bool Player2;
     [Header("Heatlh Bar")]
     [SerializeField] private Slider _playerSlider;
 
+    private MatchManager matchManager;
     private bool canTakeDamage = true;
 
+
+    private void Start()
+    {
+        matchManager = FindFirstObjectByType<MatchManager>();
+    }
     private void KillPlayer()
     {
         if (currentHealth <= 0)
@@ -31,6 +39,15 @@ public class PlayerHealth : MonoBehaviour
                 _objectsToDisable[i].SetActive(false);
             }
             _vfxObject.SetActive(true);
+            if (Player1)
+            {
+                score.ScorePlayer2++;
+            }
+            else if (Player2)
+            {
+                score.ScorePlayer1++;
+            }
+            matchManager.RestartGame();
         }
     }
 

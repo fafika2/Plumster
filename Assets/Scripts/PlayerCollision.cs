@@ -11,6 +11,10 @@ public class PlayerCollision : MonoBehaviour
     
     private Vector2 _player1Velocity, _player2Velocity;
 
+    private void Start()
+    {
+        _player2RigidBody2D = FindFirstObjectByType<PlayerControler>().GetComponent<Rigidbody2D>();
+    }
     private void Update()
     {
             _player1Velocity = _player1RigidBody2D.linearVelocity;

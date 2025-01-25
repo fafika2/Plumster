@@ -650,12 +650,14 @@ MonoBehaviour:
   rb2D: {fileID: 6412425147344838272}
   isGrounded: 0
   jumpRequested: 0
+  canMove: 1
   actionRequested: 0
   isJumping: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 2385991591558105238}
+  currentPowerUp: {fileID: 0}
   inputReader: {fileID: 11400000, guid: ef47d494275ad6b46ac0235053518618, type: 2}
 --- !u!114 &8717588173383065404
 MonoBehaviour:
@@ -688,7 +690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _currentHealth: 100
+  currentHealth: 100
   _objectsToDisable:
   - {fileID: 3144719320505223111}
   - {fileID: 757186740482245756}
@@ -697,6 +699,9 @@ MonoBehaviour:
   _playerControler: {fileID: 3594956133276069996}
   _collider2D: {fileID: 5983046439511471001}
   _playerRigidbody: {fileID: 6412425147344838272}
+  score: {fileID: 11400000, guid: d156d9d503872434ea426e8e07fa2dcc, type: 2}
+  Player1: 0
+  Player2: 1
   _playerSlider: {fileID: 9158018624038553881}
 --- !u!1 &8703915354416146734
 GameObject:
