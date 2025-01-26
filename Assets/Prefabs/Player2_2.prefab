@@ -794,7 +794,7 @@ MonoBehaviour:
   _collider2D: {fileID: 5983046439511471001}
   _playerRigidbody: {fileID: 6412425147344838272}
   playerSprite: {fileID: 8717588173383065404}
-  invicibilitySprite: {fileID: 6492521699559012112}
+  invicibilitySprite: {fileID: 21300000, guid: 8e748b187404a1c429faf85380177c98, type: 3}
   score: {fileID: 11400000, guid: d156d9d503872434ea426e8e07fa2dcc, type: 2}
   Player1: 0
   Player2: 1
