@@ -53,7 +53,10 @@ public class PlayerOneControler : PlayerControler
     }
     private void MovementHorizontal()
     {
-        rb2D.AddForce(new Vector2(movementVectorLeftRight.x *playerSettings.movementAcceleration, 0), ForceMode2D.Impulse);
+        if (-playerSettings.maxMovementSpeed/2 < rb2D.linearVelocity.x &&  rb2D.linearVelocity.x < playerSettings.maxMovementSpeed/2)
+        {
+            rb2D.AddForce(new Vector2(movementVectorLeftRight.x *playerSettings.movementAcceleration, 0), ForceMode2D.Impulse);
+        }
         rb2D.linearVelocity = new Vector2(Mathf.Clamp(rb2D.linearVelocity.x, -playerSettings.maxMovementSpeed, playerSettings.maxMovementSpeed), Mathf.Clamp(rb2D.linearVelocity.y, -playerSettings.maxMovementSpeed, playerSettings.maxMovementSpeed));
     }
     void OnDrawGizmosSelected()
