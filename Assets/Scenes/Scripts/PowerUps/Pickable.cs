@@ -8,6 +8,8 @@ public class Pickable : MonoBehaviour
     
     [SerializeField] private List<GameObject> pickups;
     [SerializeField] private float timeBetweenPickups;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip pickupSound;
     public bool isActive;
     public SpriteRenderer SpriteRenderer;
     
@@ -27,6 +29,7 @@ public class Pickable : MonoBehaviour
             PlayerControler playerController = other.GetComponent<PlayerControler>();
             if (!playerController.HasPowerUp()) return;
             OnPickup(other.gameObject);
+            audioSource.PlayOneShot(pickupSound);
         }
     }
 
