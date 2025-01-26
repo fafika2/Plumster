@@ -551,6 +551,10 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.newSize.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6412288242514714927, guid: fd7ccebcadc8d3e46ad92868d2c195bf, type: 3}
+      propertyPath: m_Color.a
+      value: 0.3882353
+      objectReference: {fileID: 0}
     - target: {fileID: 6457445230347079901, guid: fd7ccebcadc8d3e46ad92868d2c195bf, type: 3}
       propertyPath: m_Points.Array.data[1].x
       value: 1.3248726
