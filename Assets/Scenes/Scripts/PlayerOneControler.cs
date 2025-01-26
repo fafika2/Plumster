@@ -46,6 +46,7 @@ public class PlayerOneControler : PlayerControler
         if (currentPowerUp != null && actionRequested)
         {
             powerUpImage.SetActive(false);
+            audioSource.PlayOneShot(currentPowerUp.GetPowerUpAudioClip());
             currentPowerUp.UsePowerUp();
             actionRequested = false;
         }

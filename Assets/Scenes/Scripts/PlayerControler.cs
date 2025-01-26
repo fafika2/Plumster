@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerControler : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] protected PlayerSettings playerSettings;
-    
     [SerializeField] protected Rigidbody2D rb2D;
+    [SerializeField] protected PlayerSpriteAndBubbleController playerSpriteAndBubbleController;
     
     [SerializeField] protected bool isGrounded;
-    [SerializeField] protected bool jumpRequested;
     [SerializeField] protected bool canMove = true;
     [SerializeField] protected bool actionRequested;
     [SerializeField] protected bool isJumping;
@@ -18,13 +18,13 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] protected Transform groundCheck;
     
     [SerializeField] protected PowerUpBase currentPowerUp;
+    [SerializeField] public GameObject powerUpImage;
+    [SerializeField] protected Sprite stopPlayerPowerSprite;
+    [SerializeField] protected AudioSource audioSource;
     
     protected Vector2 movementVectorLeftRight;
     protected float currentHorizontalSpeed;
     protected float currentVerticalSpeed;
-    protected float timeInAirAfterUngrounded;
-    [SerializeField] public GameObject powerUpImage;
-
 
     protected void HandleOnMoveLeftRight(Vector2 value)
     {
@@ -87,15 +87,13 @@ public class PlayerControler : MonoBehaviour
     IEnumerator CanMoveCouroutine(float time)
     {
         movementVectorLeftRight = Vector2.zero;
+        
         SetCanMove(false);
+        playerSpriteAndBubbleController.ChangeSprite(stopPlayerPowerSprite);
         yield return new WaitForSeconds(time);
         SetCanMove(true);
+        playerSpriteAndBubbleController.SetBaseSprite();
         yield return null;
-    }
-
-    public void FindPowerUpImage()
-    {
-        powerUpImage = GameObject.FindGameObjectWithTag("LeftPowerUp");
     }
     
 }
