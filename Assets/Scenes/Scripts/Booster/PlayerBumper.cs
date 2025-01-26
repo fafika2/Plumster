@@ -4,6 +4,11 @@ public class PlayerBumper : MonoBehaviour
 {
     [SerializeField] private float _bumperStrength = 5f;
     [SerializeField] private AudioSource _audio;
+    Animator animator;
+
+    void Start(){
+        animator = GetComponent<Animator>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,5 +26,8 @@ public class PlayerBumper : MonoBehaviour
         var Direction = Player.transform.position - transform.position;
         PlayerRigidbody2D.linearVelocity = Vector2.zero;
         PlayerRigidbody2D.AddForce(Direction.normalized * _bumperStrength, ForceMode2D.Impulse);
+
+        animator.SetTrigger("bump");
+
     }
 }
