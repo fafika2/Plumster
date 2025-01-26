@@ -660,7 +660,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2385991591558105238}
   currentPowerUp: {fileID: 0}
   powerUpImage: {fileID: 0}
-  stopPlayerPowerSprite: {fileID: 21300000, guid: 8ed2a36a32211da4ba601060323d20a6, type: 3}
+  stopPlayerPowerSprite: {fileID: 21300000, guid: bbeb21778d43f794bbe5b552ab47677f, type: 3}
   audioSource: {fileID: 2257183811840649266}
   inputReader: {fileID: 11400000, guid: ef47d494275ad6b46ac0235053518618, type: 2}
 --- !u!114 &8717588173383065404
