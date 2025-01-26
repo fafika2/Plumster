@@ -19,7 +19,7 @@ public class PlayerControler : MonoBehaviour
     
     [SerializeField] protected PowerUpBase currentPowerUp;
     [SerializeField] public GameObject powerUpImage;
-    [SerializeField] protected Sprite stopPlayerPowerSprite;
+    [SerializeField] protected GameObject stopPlayerPowerSprite;
     [SerializeField] protected AudioSource audioSource;
     
     protected Vector2 movementVectorLeftRight;
@@ -89,10 +89,10 @@ public class PlayerControler : MonoBehaviour
         movementVectorLeftRight = Vector2.zero;
         
         SetCanMove(false);
-        playerSpriteAndBubbleController.ChangeSprite(stopPlayerPowerSprite);
+        stopPlayerPowerSprite.SetActive(true);
         yield return new WaitForSeconds(time);
         SetCanMove(true);
-        playerSpriteAndBubbleController.SetBaseSprite();
+        stopPlayerPowerSprite.SetActive(false);
         yield return null;
     }
     
