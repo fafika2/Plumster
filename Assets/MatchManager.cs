@@ -15,6 +15,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private DoSomethingWhenTimerCount _timer;
     [SerializeField] private Animator _fadeInOutAnimator;
     [SerializeField] private GameObject _canvasCounting;
+    [SerializeField] private GameObject[] PowerUpImages;
 
 
     public void Awake()
@@ -71,7 +72,10 @@ public class MatchManager : MonoBehaviour
             spawnedPlayers.Add(spawnedPlayer);
             TargetGroup.AddMember(spawnedPlayers[i].transform, 1, 4);
             spawnedPlayer.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
-            spawnedPlayer.GetComponent<PlayerControler>().enabled = false;
+            PlayerControler spawnedPlayerControler = spawnedPlayer.GetComponent<PlayerControler>();
+            spawnedPlayerControler.powerUpImage = PowerUpImages[i];
+            spawnedPlayerControler.powerUpImage.SetActive(false);
+            spawnedPlayerControler.enabled = false;
         }
     }
     

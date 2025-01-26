@@ -6,7 +6,6 @@ public class PlayerTwoControler : PlayerControler
     [SerializeField] protected PlayerTwoInputReader inputReader;
     void OnEnable()
     {
-        powerUpImage = GameObject.FindGameObjectWithTag("RightPowerUp");
         inputReader.OnMoveLeftRightEvent += HandleOnMoveLeftRight;
         inputReader.OnJumpEvent += HandleJump;
         inputReader.OnActionEvent += HandleAction;
@@ -18,11 +17,7 @@ public class PlayerTwoControler : PlayerControler
         inputReader.OnJumpEvent -= HandleJump;
         inputReader.OnActionEvent -= HandleAction;
     }
-
-    private void Start()
-    {
-        powerUpImage.SetActive(false);
-    }
+    
     // Update is called once per frame
     void FixedUpdate()
     {

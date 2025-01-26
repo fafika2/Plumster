@@ -23,7 +23,7 @@ public class PlayerControler : MonoBehaviour
     protected float currentHorizontalSpeed;
     protected float currentVerticalSpeed;
     protected float timeInAirAfterUngrounded;
-    [SerializeField] protected GameObject powerUpImage;
+    [SerializeField] public GameObject powerUpImage;
 
 
     protected void HandleOnMoveLeftRight(Vector2 value)
@@ -92,4 +92,10 @@ public class PlayerControler : MonoBehaviour
         SetCanMove(true);
         yield return null;
     }
+
+    public void FindPowerUpImage()
+    {
+        powerUpImage = GameObject.FindGameObjectWithTag("LeftPowerUp");
+    }
+    
 }
