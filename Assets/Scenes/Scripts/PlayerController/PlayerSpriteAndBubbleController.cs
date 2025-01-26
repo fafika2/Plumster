@@ -51,4 +51,14 @@ public class PlayerSpriteAndBubbleController : MonoBehaviour
     {
         _bombelekSpriteRenderer.sprite = _basicSprite;
     }
+
+    public void ChangeBombelekAlhpaForBabbleFoil()
+    {
+        _bombelekSpriteRenderer.color = new Color(1, 1, 1, 0.75f);
+    }
+
+    public void ChangeBombelekAlhpaForHamster()
+    {
+        _bombelekSpriteRenderer.color = new Color(1, 1, 1, 0.3f);
+    }
 }

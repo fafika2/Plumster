@@ -97,7 +97,9 @@ public class PlayerHealth : MonoBehaviour
     {
         canTakeDamage = false;
         playerSprite.ChangeSprite(invicibilitySprite);
+        playerSprite.ChangeBombelekAlhpaForBabbleFoil();
         yield return new WaitForSeconds(seconds);
+        playerSprite.ChangeBombelekAlhpaForHamster();
         playerSprite.SetBaseSprite();
         canTakeDamage = true;
     }
