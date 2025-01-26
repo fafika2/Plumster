@@ -14,6 +14,7 @@ public class MatchManager : MonoBehaviour
     [SerializeField] private UpdateScore updateScore;
     [SerializeField] private DoSomethingWhenTimerCount _timer;
     [SerializeField] private Animator _fadeInOutAnimator;
+    [SerializeField] private GameObject _canvasCounting;
 
 
     public void Awake()
@@ -41,6 +42,7 @@ public class MatchManager : MonoBehaviour
         {
             Invoke("LoadPlayer2WinScene", 2f);
         }
+        _canvasCounting.SetActive(false);
         _timer.CanCount = false;
     }
 
@@ -52,6 +54,7 @@ public class MatchManager : MonoBehaviour
         }
         else
         {
+            _canvasCounting.SetActive(false);
             Invoke("FadeIn", 1f);
             _timer.CanCount = false;
             _timer.ResetTime();
@@ -75,6 +78,7 @@ public class MatchManager : MonoBehaviour
     IEnumerator StartGameCoroutine()
     {
         _fadeInOutAnimator.SetBool("FadeIn", false);
+        _canvasCounting.SetActive(true);
         PreparePlayers();
         yield return new WaitForSeconds(3f);
         StartGame();
