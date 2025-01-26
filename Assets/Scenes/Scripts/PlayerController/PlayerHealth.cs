@@ -15,6 +15,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Rigidbody2D _playerRigidbody;
     [SerializeField] private PlayerSpriteAndBubbleController playerSprite;
     [SerializeField] private Sprite invicibilitySprite;
+    [SerializeField] private AudioSource audioSource;
+    
     [Header("Score")]
     [SerializeField] private SO_Score score;
     [SerializeField] private bool Player1;
@@ -23,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Heatlh Bar")]
     [SerializeField] private Slider _playerSlider;
 
+    
     private MatchManager matchManager;
     private bool canTakeDamage = true;
 
@@ -45,6 +48,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            SoundMenager soundMenager = new SoundMenager();
+            soundMenager.PlaySound(audioSource, new Vector2(0.9f, 1.1f), new Vector2(0.8f, 1f) );
             _playerControler.enabled = false;
             _collider2D.enabled = false;
             _playerRigidbody.bodyType = RigidbodyType2D.Static;

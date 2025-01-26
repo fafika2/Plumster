@@ -8,12 +8,16 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private PlayerControler player;
     [SerializeField] private PlayerSettings playerSettings;
     [SerializeField] private Rigidbody2D _player1RigidBody2D, _player2RigidBody2D;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
+    private SoundMenager SoundMenager;
     
     private Vector2 _player1Velocity, _player2Velocity;
 
     private void Start()
     {
         _player2RigidBody2D = FindFirstObjectByType<PlayerControler>().GetComponent<Rigidbody2D>();
+        SoundMenager = new SoundMenager();
     }
     private void Update()
     {
@@ -25,6 +29,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            SoundMenager.PlaySound(audioSource, new Vector2(0.9f, 1.1f), new Vector2(0.8f, 1f) );
             var Player1VelocitySum = Mathf.Abs(_player1Velocity.x) + Mathf.Abs(_player1Velocity.y);
             var Player2VelocitySum = Mathf.Abs(_player2Velocity.x) + Mathf.Abs(_player2Velocity.y);
 
