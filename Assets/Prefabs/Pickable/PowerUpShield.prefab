@@ -48,3 +48,4 @@ MonoBehaviour:
   duration: 5
   playerControler: {fileID: 0}
   powerUpSprite: {fileID: 21300000, guid: ad72114228520a34eab44d8484f4db4d, type: 3}
+  powerUpAudioClip: {fileID: 8300000, guid: df38280c2ab6441469696c5f37d33cf8, type: 3}

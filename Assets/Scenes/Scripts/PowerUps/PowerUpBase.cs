@@ -7,6 +7,7 @@ public class PowerUpBase : MonoBehaviour
     [SerializeField] protected float duration;
     [SerializeField] protected PlayerControler playerControler;
     [SerializeField] protected Sprite powerUpSprite;
+    [SerializeField] protected AudioClip powerUpAudioClip;
     
     public void UsePowerUp()
     {
@@ -35,5 +36,10 @@ public class PowerUpBase : MonoBehaviour
     public Sprite GetPowerUpSprite()
     {
         return powerUpSprite;
+    }
+
+    public AudioClip GetPowerUpAudioClip()
+    {
+        return powerUpAudioClip;
     }
 }

@@ -4,14 +4,17 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Settings")]
     [SerializeField] private float _maxHealth = 100;
     public float currentHealth = 100;
-    [Header("Player Death")]
+    [Header("References")]
     [SerializeField] private GameObject[] _objectsToDisable;
     [SerializeField] private GameObject _vfxObject;
     [SerializeField] private PlayerControler _playerControler;
     [SerializeField] private Collider2D _collider2D;
     [SerializeField] private Rigidbody2D _playerRigidbody;
+    [SerializeField] private PlayerSpriteAndBubbleController playerSprite;
+    [SerializeField] private Sprite invicibilitySprite;
     [Header("Score")]
     [SerializeField] private SO_Score score;
     [SerializeField] private bool Player1;
@@ -88,7 +91,9 @@ public class PlayerHealth : MonoBehaviour
     IEnumerator Invicibility(float seconds)
     {
         canTakeDamage = false;
+        playerSprite.ChangeSprite(invicibilitySprite);
         yield return new WaitForSeconds(seconds);
+        playerSprite.SetBaseSprite();
         canTakeDamage = true;
     }
 }

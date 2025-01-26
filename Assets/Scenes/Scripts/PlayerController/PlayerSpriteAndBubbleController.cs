@@ -5,7 +5,9 @@ public class PlayerSpriteAndBubbleController : MonoBehaviour
     [SerializeField] private Transform _spriteBallRotation;
     [SerializeField] private Rigidbody2D _characterRigidbody;
     [SerializeField] private float _rotationSpeed = 2f;
+    [SerializeField] private SpriteRenderer _bombelekSpriteRenderer;
     [SerializeField] private SpriteRenderer _hamsterSpriteRenderer;
+    [SerializeField] private Sprite _basicSprite;
     [SerializeField] private Animator _hamsterAnimator;
     [SerializeField] private PlayerSettings _playerSettings;
 
@@ -38,5 +40,15 @@ public class PlayerSpriteAndBubbleController : MonoBehaviour
     {
         var NormalizedVelocity = Mathf.Abs(Velocity) / _playerSettings.maxMovementSpeed;
         _hamsterAnimator.speed = NormalizedVelocity;
+    }
+
+    public void ChangeSprite(Sprite sprite)
+    {
+        _bombelekSpriteRenderer.sprite = sprite;
+    }
+
+    public void SetBaseSprite()
+    {
+        _bombelekSpriteRenderer.sprite = _basicSprite;
     }
 }
