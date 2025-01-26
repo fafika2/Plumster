@@ -971,6 +971,9 @@ MonoBehaviour:
   _timer: {fileID: 965846491}
   _fadeInOutAnimator: {fileID: 338798590}
   _canvasCounting: {fileID: 7824586383544163203}
+  PowerUpImages:
+  - {fileID: 3475490635777828710}
+  - {fileID: 3475490635777828709}
 --- !u!4 &597463873
 Transform:
   m_ObjectHideFlags: 0
@@ -1412,6 +1415,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a0d6beedd5b6147a25a7fc697b0a66, type: 3}
+--- !u!1 &3475490635777828709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 780351956508932288, guid: f4a0d6beedd5b6147a25a7fc697b0a66, type: 3}
+  m_PrefabInstance: {fileID: 3475490635777828708}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3475490635777828710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8072359827281328644, guid: f4a0d6beedd5b6147a25a7fc697b0a66, type: 3}
+  m_PrefabInstance: {fileID: 3475490635777828708}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6950875643648285286
 PrefabInstance:
   m_ObjectHideFlags: 0
